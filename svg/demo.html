@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0; user-scalable=0"; />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <title>svg方法实现Retina屏的1px</title>
+    <style>
+        /* css reset
+        *****************************************************************************/
+        html, body, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ul, ol, li, form, fieldset, button, input, textarea {
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: none;
+        }
+        html { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight-color: transparent; }
+        body { font: 12px/1 "Helvetica Neue"; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4, h5, h6 { font-weight: normal; font-size: 100%; }
+        em, i { font-style: normal; }
+        a { text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+        ul, ol, li { list-style: none; }
+        img { border: 0; }
+        table { border-spacing: 0; border-collapse: collapse; }
+        input, textarea { -webkit-user-select: text; }
+        button, input, select, label, textarea { font-size: 100%; -webkit-appearance: none; }
+
+        .wrap { margin: 0 auto; text-align: center;}
+        body { background: #f8f8f8; }
+        h2 { margin: 20px 0 10px;}
+        .box { margin: 0 auto; height: 200px; width: 200px; background: #fff;}
+        .box1 { border-left: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='100%'><rect fill='#c8c8c8' x='0' y='0' width='0.5' height='100%'/></svg>"); background-position: 0 0; background-repeat: no-repeat; }
+        .box2 { border-top: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c8c8' x='0' y='0' width='100%' height='0.5'/></svg>"); background-position: 0 0; background-repeat: no-repeat; }
+        .box3 { border-right: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='100%'><rect fill='#c8c8c8' x='0' y='0' width='0.5' height='100%'/></svg>"); background-position: 100% 0; background-repeat: no-repeat; }
+        .box4 { border-bottom: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c8c8' x='0' y='0' width='100%' height='0.5'/></svg>"); background-position: 0 100%; background-repeat: no-repeat; }
+        .box5 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='100%'><rect fill='#c8c8c8' x='0' y='0' width='0.5' height='100%'/></svg>"),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='100%'><rect fill='#c8c8c8' x='0' y='0' width='0.5' height='100%'/></svg>"); background-position: 0 0, 100% 0; background-repeat: no-repeat; }
+        .box6 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c8c8' x='0' y='0' width='100%' height='0.5'/></svg>"),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c8c8' x='0' y='0' width='100%' height='0.5'/></svg>"); background-position: 0 0,0 100%; background-repeat: no-repeat; }
+        .box7 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><rect x='0' y='0' rx='3' ry='3' width='100%' height='100%' style='fill:#fff; stroke:#dcdcdc; stroke-width: dd0.5;fill-opacity:0;'/></svg>"); background-position: 0 0; background-repeat: no-repeat; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h2>左边框</h2>
+    <div class="box box1"></div>
+    <h2>上面框</h2>
+    <div class="box box2"></div>
+    <h2>右边框</h2>
+    <div class="box box3"></div>
+    <h2>下面框</h2>
+    <div class="box box4"></div>
+    <h2>左右边框</h2>
+    <div class="box box5"></div>
+    <h2>上下边框</h2>
+    <div class="box box6"></div>
+    <h2>全边框</h2>
+    <div class="box box7"></div>
+</div>
+</body>
+</html>
