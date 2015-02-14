@@ -109,3 +109,10 @@ function orientationHandler(fn) {
     win.addEventListener(orientationEvent, updateOrientation, false);
 }
 ```
+
+### 判断是否是微信
+```js
+function isWX() {
+    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
+}
+```
