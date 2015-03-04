@@ -116,3 +116,23 @@ function isWX() {
     return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == "micromessenger";
 }
 ```
+
+### guideTop
+```html
+<a href="javascript:;" data-index="2" class="u-guideTop z-move"><i></i></a>
+```
+```css
+.u-guideTop { position: absolute; bottom: 0; left: 50%; z-index: 1; width: 200px; height: 70px; border-radius: 8px 8px 0 0; background-color: rgba(0, 0, 0, .2); color: #fff; -webkit-transform: translate3d(-50%, 0, 0); }
+.u-guideTop i { position: absolute; top: 50%; left: 50%; margin: -26px 0 0 -35px; width: 70px; height: 26px; background: url("../images/guideTop.png") no-repeat 50% 50%; }
+.u-guideTop.z-move i { -webkit-animation: guideTop 1.5s infinite }
+@-webkit-keyframes guideTop {
+    0% { -webkit-transform: translateY(64px); opacity: 0 }
+    60% { -webkit-transform: translateY(18px); opacity: 1 }
+    100% { -webkit-transform: translateY(0px); opacity: 0 }
+    }
+@keyframes guideTop {
+    0% { transform: translateY(64px); opacity: 0 }
+    60% { transform: translateY(18px); opacity: 1 }
+    100% { transform: translateY(0px); opacity: 0 }
+    }
+```
