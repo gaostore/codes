@@ -36,6 +36,11 @@ function setMeta() {
 
 
 ### 预加载图片
+```html
+<div class="page-loading-wrap" id="j_pageLoading">
+    <div class="time-line-txt">正在加载中<em id="j_progress"></em></div>
+</div>
+```
 ```js
 /**
  * 预加载图片
@@ -136,3 +141,108 @@ function isWX() {
     100% { transform: translateY(0px); opacity: 0 }
     }
 ```
+
+###音乐
+```html
+<div class="music-bar" id="j_musicBar">
+    <div class="music-img"></div>
+    <div class="music-txt">开启</div>
+    <audio id="mp3" loop preload="auto" autoplay="true" class="hide" src=""></audio>
+</div>
+```
+```css
+.music-bar { position: absolute; top: 20px; right: 20px; z-index: 4; width: 60px; height: 60px }
+.music-img { position: absolute; top: 0; left: 0; width: 48px; height: 48px; background: url("../images/music.png?__sprite") no-repeat 50% 50%; }
+.play .music-img { -webkit-animation: rotate 1.2s linear infinite; animation: rotate 1.2s linear infinite }
+.music-txt { position: absolute; top: 0; left: 0; color: #fff; font-size: 28px; line-height: 50px; opacity: 0; -webkit-animation-duration: 1.2s; -webkit-animation-timing-function: ease }
+.play .music-txt { -webkit-animation-name: fadeinr }
+.pause .music-txt { -webkit-animation-name: fadeinr; -webkit-animation-delay: .01s }
+```
+```javascript
+// 音乐
+window.NS = window.NS || {};
+NS._util = {
+    hasClass: function (obj, className) {
+        return RegExp('(^|\\s)' + className + '(\\s|$)').test(obj.className);
+    }
+    , addClass: function (obj, newClass) {
+        if (!NS._util.hasClass(obj, newClass)) {
+            obj.className += (obj.className ? ' ' : '') + newClass;
+        }
+    }
+    , removeClass: function (obj, curClass) {
+        obj.className = obj.className.replace(RegExp('(\\s|$)' + curClass, 'g'), '');
+    },
+    /**
+     * 查找键值
+     * @param name {string} 键
+     * @returns {*|null}
+     */
+    getData: function (name) {
+        var str = localStorage.getItem(name);
+        var data = JSON.parse(str);
+        return data || null;
+    },
+    /**
+     * 保存数据
+     * @param name {string} 键
+     * @param property {string} 属性
+     * @param value {string} 值
+     */
+    setData: function (name, property, value) {
+        var storageData = this.getData(name) || {};
+        storageData[property] = value;
+        var str = JSON.stringify(storageData);
+        localStorage.setItem(name, str);
+    }
+    }
+
+var oMusic = document.getElementById('j_musicBar');
+var oMusicTxt = oMusic.querySelector('.music-txt');
+var audio = document.querySelector("audio");
+musicUtil(oMusic, oMusicTxt, audio);
+function musicUtil(oMusic, oMusicTxt, audio) {
+    var isPlay = false;
+    audioAttach();
+
+    oMusic.addEventListener('touchstart', function () {
+        isPlay ? pause() : play();
+    }, false);
+
+    function audioAttach() {
+        var palyFirst = function () {
+            audio.play();
+            NS._util.addClass(oMusic, 'play');
+            isPlay = true;
+            document.body.removeEventListener('touchstart', palyFirst, false);
+        };
+
+        audio.oncanplay = playmusic();
+        audio.autoplay = true;
+        audio.isLoadedmetadata = false;
+        audio.audio = true;
+
+        function playmusic() {
+            document.body.addEventListener('touchstart', palyFirst, false);
+        }
+    }
+
+    function pause() {
+        audio.pause();
+        isPlay = false;
+        oMusicTxt.innerHTML = '&#26242;&#20572;';
+        NS._util.removeClass(oMusic, 'play');
+        NS._util.addClass(oMusic, 'pause');
+    }
+
+    function play() {
+        audio.play();
+        isPlay = true;
+        oMusicTxt.innerHTML = '&#24320;&#21551;';
+        NS._util.removeClass(oMusic, 'pause');
+        NS._util.addClass(oMusic, 'play');
+    }
+}
+```
+
+
