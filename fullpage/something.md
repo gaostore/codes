@@ -19,7 +19,7 @@
 }();
 ```
 
-### 适用于微信的适配
+### 适用于微信的适配 方法1
 ```js
 function setMeta() {
     var dpr = navigator.appVersion.match(/Mobile/gi) ? window.devicePixelRatio : 1;
@@ -32,6 +32,13 @@ function setMeta() {
     }
     metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', minimum-scale=' + scale + ', maximum-scale=' + scale + ', user-scalable=no');
 }
+```
+### 适用于微信的适配 方法2
+```js
+(function () {
+    var version, phoneScale;
+    /Android (\d+\.\d+)/.test(navigator.userAgent) ? (version = parseFloat(RegExp.$1), version > 2.3 ? (phoneScale = parseInt(window.screen.width) / 640, document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ", maximum-scale = " + phoneScale + ', target-densitydpi=device-dpi">')) : document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">')) : document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+})();
 ```
 
 
