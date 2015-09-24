@@ -157,6 +157,11 @@ function isWX() {
     <div class="music-txt">开启</div>
     <audio id="mp3" loop preload="auto" autoplay="true" class="hide" src=""></audio>
 </div>
+//or 一开始就记载音乐
+<div class="music-bar" id="j_musicBar">
+    <div class="music-img"></div>
+    <audio id="mp3" loop preload="auto" autoplay="true" class="hide" src=""></audio>
+</div>
 ```
 ```css
 .music-bar { position: absolute; top: 20px; right: 20px; z-index: 4; width: 60px; height: 60px }
@@ -251,6 +256,31 @@ function musicUtil(oMusic, oMusicTxt, audio) {
         NS._util.addClass(oMusic, 'play');
     }
 }
+
+//or
+/**
+ * Music Mood
+ * @type {Element}
+ */
+var oMusic = document.getElementById('j_musicBar');
+var audio = document.querySelector("audio");
+play();
+var isPlay = true;
+function pause() {
+    audio.pause();
+    isPlay = false;
+    oMusic.classList.remove('play');
+    oMusic.classList.add('pause');
+}
+function play() {
+    audio.play();
+    isPlay = true;
+    oMusic.classList.add('play');
+    oMusic.classList.remove('pause');
+}
+oMusic.addEventListener('touchstart',function(){
+    isPlay? pause():play();
+});
 ```
 
 ###判断访问终端
