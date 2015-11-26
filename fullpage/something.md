@@ -331,11 +331,11 @@ var browser={
     var timeout, t = 1000, hasApp = true;
     setTimeout(function () {
         if (hasApp) {
-            alert('安装了app');
+            log('安装了app');
             $('#dl_app').hide();
 
         } else {
-            alert('未安装app');
+            log('未安装app');
             $('#dl_app').show();
             forceDownload();
         }
