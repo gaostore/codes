@@ -320,8 +320,10 @@ var browser={
 
 
 ###判断是否安装过app
+```html
 <meta name='apple-itunes-app' content='app-id=你的APP-ID'>
 <a href="javascript:;" id="openApp" onclick="testApp()"></a>
+```
 ```js
  var log = function (msg) {
         $('body').before('<div class="log">' + msg + '</div>');
