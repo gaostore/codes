@@ -317,3 +317,41 @@ var browser={
     language:(navigator.browserLanguage || navigator.language).toLowerCase()
 }
 ```
+
+
+###判断是否安装过app
+<meta name='apple-itunes-app' content='app-id=你的APP-ID'>
+<a href="javascript:;" id="openApp" onclick="testApp()"></a>
+```js
+ var log = function (msg) {
+        $('body').before('<div class="log">' + msg + '</div>');
+    };
+    var timeout, t = 1000, hasApp = true;
+    setTimeout(function () {
+        if (hasApp) {
+            alert('安装了app');
+            $('#dl_app').hide();
+
+        } else {
+            alert('未安装app');
+            $('#dl_app').show();
+            forceDownload();
+        }
+    }, 2000)
+    function testApp() {
+        var t1 = Date.now();
+        var ifr = $('<iframe id="ifr"></iframe>')
+        ifr.attr('src',您们app的协议);
+        $('body').append(ifr);
+        timeout = setTimeout(function () {
+            try_to_open_app(t1);
+        }, t);
+    }
+    function try_to_open_app(t1) {
+        var t2 = Date.now();
+        if (!t1 || t2 - t1 < t + 200) {
+            hasApp = false;
+        }
+    }
+    testApp();
+```
