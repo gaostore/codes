@@ -163,6 +163,15 @@ function isWX() {
     <audio id="mp3" loop preload="auto" autoplay="true" class="hide" src=""></audio>
 </div>
 ```
+```js
+//微信端适配
+var bg_audio = document.getElementById("j_bg_audio");
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+            bg_audio.play();
+        });
+    }, false);
+```
 ```css
 .music-bar { position: absolute; top: 20px; right: 20px; z-index: 4; width: 60px; height: 60px }
 .music-img { position: absolute; top: 0; left: 0; width: 48px; height: 48px; background: url("../images/music.png?__sprite") no-repeat 50% 50%; }
